@@ -1,8 +1,12 @@
 function Scoreboard({ score, bestScore }) {
   return (
     <div className="scoreboard">
-      <p>Score: {score}</p>
-      <p>Best score: {bestScore}</p>
+      <p>
+        Score <span>{score}</span>
+      </p>
+      <p>
+        Best <span>{bestScore}</span>
+      </p>
     </div>
   );
 }

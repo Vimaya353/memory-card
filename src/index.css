@@ -1,4 +1,193 @@
+:root {
+  --sky-top: #8ec9e8;
+  --sky-mid: #cfe8ef;
+  --sky-bottom: #e8f4e0;
+  --meadow-dark: #3f7a4a;
+  --cream: #fdf6e3;
+  --parchment: #f6ead0;
+  --peach: #f4a97f;
+  --ink: #2f4a3a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: system-ui,sans-serif;
+  min-height: 100vh;
+  font-family: "Nunito", system-ui, sans-serif;
+  color: var(--ink);
+  background: linear-gradient(
+    to bottom,
+    var(--sky-top) 0%,
+    var(--sky-mid) 45%,
+    var(--sky-bottom) 100%
+  );
+  background-attachment: fixed;
+}
+
+/* Drifting clouds */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 180px 55px at 15% 18%, rgba(255, 255, 255, 0.85), transparent 70%),
+    radial-gradient(ellipse 240px 65px at 70% 10%, rgba(255, 255, 255, 0.8), transparent 70%),
+    radial-gradient(ellipse 200px 55px at 88% 38%, rgba(255, 255, 255, 0.7), transparent 70%),
+    radial-gradient(ellipse 220px 60px at 25% 55%, rgba(255, 255, 255, 0.6), transparent 70%);
+  animation: drift 60s ease-in-out infinite alternate;
+}
+
+@keyframes drift {
+  from { transform: translateX(-4%); }
+  to { transform: translateX(4%); }
+}
+
+.app {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.status {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  font-size: 1.3rem;
+  margin-top: 4rem;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+h1 {
+  margin: 0;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 2px 12px rgba(47, 74, 58, 0.4);
+}
+
+.subtitle {
+  margin: 0.5rem 0 0;
+  font-size: 1.1rem;
+}
+
+/* Scoreboard */
+.scoreboard {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.scoreboard p {
+  margin: 0;
+  padding: 0.6rem 1.3rem;
+  background: rgba(253, 246, 227, 0.92);
+  border-radius: 999px;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(47, 74, 58, 0.15);
+}
+
+.scoreboard span {
+  margin-left: 0.4rem;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.5rem;
+  color: var(--meadow-dark);
+}
+
+/* Message banner */
+.message {
+  margin: 0 0 1.5rem;
+  padding: 0.8rem 1.2rem;
+  background: var(--peach);
+  border-radius: 14px;
+  font-weight: 700;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(47, 74, 58, 0.15);
+}
+
+/* Card grid */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border: none;
+  border-radius: 18px;
+  background: var(--parchment);
+  color: inherit;
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(47, 74, 58, 0.18);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px) rotate(-1deg);
+  box-shadow: 0 16px 28px rgba(47, 74, 58, 0.28);
+}
+
+.card:active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+.card:focus-visible {
+  outline: 4px solid var(--peach);
+  outline-offset: 3px;
+}
+
+.card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 12px;
+  background: var(--cream);
+}
+
+.card-info {
+  padding: 0.7rem 0.3rem 0.4rem;
+}
+
+.card-info h2 {
+  margin: 0;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+
+.card-info p {
+  margin: 0.3rem 0 0;
+  font-size: 0.9rem;
+  opacity: 0.75;
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  body::before {
+    animation: none;
+  }
+  .card {
+    transition: none;
+  }
 }

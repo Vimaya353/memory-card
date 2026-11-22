@@ -62,21 +62,28 @@ function App() {
     }
     setFilms(shuffle(films));
   }
-
-  if (loading) return <p>Loading films...</p>;
-  if (error) return <p>Something went wrong: {error}</p>;
+  if (loading) return <p className="status">Loading films...</p>;
+  if (error) return <p className="status">Something went wrong: {error}</p>;
 
   return (
-    <div>
-      <h1>Memory Card Game</h1>
-      <p>Click a film poster, but never the same one twice!</p>
-      <Scoreboard score={clickedIds.length} bestScore={bestScore} />
+    <div className="app">
+      <header className="header">
+        <div>
+          <h1>Sky Meadow Memory</h1>
+          <p className="subtitle">
+            Click a film poster, but never the same one twice!
+          </p>
+        </div>
+        <Scoreboard score={clickedIds.length} bestScore={bestScore} />
+      </header>
+
       {message && <p className="message">{message}</p>}
-      <div className="card-grid">
+
+      <main className="card-grid">
         {films.map((film) => (
           <Card key={film.id} film={film} onClick={handleCardClick} />
         ))}
-      </div>
+      </main>
     </div>
   );
 }
